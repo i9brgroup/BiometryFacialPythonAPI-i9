@@ -1,0 +1,41 @@
+20/01/2026 04:02:56 PM - DEBUG:matplotlib data path: C:\Users\JoselitoBarreto\OneDrive - I9 BR GROUP\Documentos\Softwares\BiometryEngine\.venv\Lib\site-packages\matplotlib\mpl-data
+20/01/2026 04:02:56 PM - DEBUG:CONFIGDIR=C:\Users\JoselitoBarreto\.matplotlib
+20/01/2026 04:02:56 PM - DEBUG:interactive is False
+20/01/2026 04:02:56 PM - DEBUG:platform is win32
+20/01/2026 04:02:56 PM - DEBUG:CACHEDIR=C:\Users\JoselitoBarreto\.matplotlib
+20/01/2026 04:02:56 PM - DEBUG:Using fontManager instance from C:\Users\JoselitoBarreto\.matplotlib\fontlist-v390.json
+20/01/2026 04:02:56 PM - INFO:Inicializando InsightFace (Modelo buffalo_s)...
+20/01/2026 04:02:56 PM - INFO:Configuração AWS carregada - Bucket: i9-biometric-images, Region: us-east-2
+20/01/2026 04:02:56 PM - DEBUG:Changing event name from creating-client-class.iot-data to creating-client-class.iot-data-plane
+20/01/2026 04:02:56 PM - DEBUG:Changing event name from before-call.apigateway to before-call.api-gateway
+20/01/2026 04:02:56 PM - DEBUG:Changing event name from request-created.machinelearning.Predict to request-created.machine-learning.Predict
+20/01/2026 04:02:56 PM - DEBUG:Changing event name from before-parameter-build.autoscaling.CreateLaunchConfiguration to before-parameter-build.auto-scaling.CreateLaunchConfiguration
+20/01/2026 04:02:56 PM - DEBUG:Changing event name from before-parameter-build.route53 to before-parameter-build.route-53
+20/01/2026 04:02:56 PM - DEBUG:Changing event name from request-created.cloudsearchdomain.Search to request-created.cloudsearch-domain.Search
+20/01/2026 04:02:56 PM - DEBUG:Changing event name from docs.*.autoscaling.CreateLaunchConfiguration.complete-section to docs.*.auto-scaling.CreateLaunchConfiguration.complete-section
+20/01/2026 04:02:56 PM - DEBUG:Changing event name from before-parameter-build.logs.CreateExportTask to before-parameter-build.cloudwatch-logs.CreateExportTask
+20/01/2026 04:02:56 PM - DEBUG:Changing event name from docs.*.logs.CreateExportTask.complete-section to docs.*.cloudwatch-logs.CreateExportTask.complete-section
+20/01/2026 04:02:56 PM - DEBUG:Changing event name from before-parameter-build.cloudsearchdomain.Search to before-parameter-build.cloudsearch-domain.Search
+20/01/2026 04:02:56 PM - DEBUG:Changing event name from docs.*.cloudsearchdomain.Search.complete-section to docs.*.cloudsearch-domain.Search.complete-section
+20/01/2026 04:02:56 PM - DEBUG:Loading JSON file: C:\Users\JoselitoBarreto\OneDrive - I9 BR GROUP\Documentos\Softwares\BiometryEngine\.venv\Lib\site-packages\botocore\data\endpoints.json
+20/01/2026 04:02:57 PM - DEBUG:Loading JSON file: C:\Users\JoselitoBarreto\OneDrive - I9 BR GROUP\Documentos\Softwares\BiometryEngine\.venv\Lib\site-packages\botocore\data\sdk-default-configuration.json
+20/01/2026 04:02:57 PM - DEBUG:Event choose-service-name: calling handler <function handle_service_name_alias at 0x000001C6D26E3CE0>
+20/01/2026 04:02:57 PM - DEBUG:Loading JSON file: C:\Users\JoselitoBarreto\OneDrive - I9 BR GROUP\Documentos\Softwares\BiometryEngine\.venv\Lib\site-packages\botocore\data\s3\2006-03-01\service-2.json.gz
+20/01/2026 04:02:57 PM - DEBUG:Loading JSON file: C:\Users\JoselitoBarreto\OneDrive - I9 BR GROUP\Documentos\Softwares\BiometryEngine\.venv\Lib\site-packages\botocore\data\s3\2006-03-01\service-2.sdk-extras.json
+20/01/2026 04:02:57 PM - DEBUG:Loading JSON file: C:\Users\JoselitoBarreto\OneDrive - I9 BR GROUP\Documentos\Softwares\BiometryEngine\.venv\Lib\site-packages\botocore\data\s3\2006-03-01\endpoint-rule-set-1.json.gz
+20/01/2026 04:02:57 PM - DEBUG:Loading JSON file: C:\Users\JoselitoBarreto\OneDrive - I9 BR GROUP\Documentos\Softwares\BiometryEngine\.venv\Lib\site-packages\botocore\data\partitions.json
+20/01/2026 04:02:57 PM - DEBUG:Event creating-client-class.s3: calling handler <function add_generate_presigned_post at 0x000001C6D26825C0>
+20/01/2026 04:02:57 PM - DEBUG:Event creating-client-class.s3: calling handler <function lazy_call.<locals>._handler at 0x000001C6D1FF6D40>
+20/01/2026 04:02:57 PM - DEBUG:Event creating-client-class.s3: calling handler <function add_generate_presigned_url at 0x000001C6D2682340>
+20/01/2026 04:02:57 PM - DEBUG:Looking for endpoint for s3 via: environment_service
+20/01/2026 04:02:57 PM - DEBUG:Looking for endpoint for s3 via: environment_global
+20/01/2026 04:02:57 PM - DEBUG:Looking for endpoint for s3 via: config_service
+20/01/2026 04:02:57 PM - DEBUG:Looking for endpoint for s3 via: config_global
+20/01/2026 04:02:57 PM - DEBUG:No configured endpoint found.
+20/01/2026 04:02:57 PM - DEBUG:Setting s3 timeout as (60, 60)
+20/01/2026 04:02:57 PM - DEBUG:Loading JSON file: C:\Users\JoselitoBarreto\OneDrive - I9 BR GROUP\Documentos\Softwares\BiometryEngine\.venv\Lib\site-packages\botocore\data\_retry.json
+20/01/2026 04:02:57 PM - DEBUG:Registering retry handlers for service: s3
+20/01/2026 04:02:57 PM - DEBUG:Registering S3 region redirector handler
+20/01/2026 04:02:57 PM - DEBUG:Registering S3Express Identity Resolver
+20/01/2026 04:02:57 PM - INFO:Cliente S3 configurado com credenciais do .env
+20/01/2026 04:02:58 PM - INFO:Motor Biométrico pronto.
