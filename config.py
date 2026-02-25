@@ -18,9 +18,12 @@ def get_value(section: str, key: str, env_var: str = None, default: str = None):
     """Obtém valor: prioridade env var > .env > default"""
     if env_var and os.environ.get(env_var):
         return os.environ.get(env_var)
+    
+    # Se a env var não existir, tenta ler do .env
     try:
         return config.get(section, key)
     except Exception:
+        # Se falhar o config.get, retorna o default
         return default
 
 
@@ -52,3 +55,15 @@ def get_aws_config():
 
     print(f"[CONFIG] AWS Config: BUCKET={bucket}, REGION={aws_config['REGION']}")
     return aws_config
+
+def get_api_key():
+    """Retorna a chave secreta da aplicação"""
+    return get_value('api_security', 'API_KEY')
+
+def get_secret_key():
+    """Retorna a chave secreta para tokens"""
+    return get_value('api_security', 'SECRET_KEY')
+
+def get_hashed_key():
+    """Retorna a chave hash armazenada"""
+    return get_value('api_security', 'HASHED_KEY')

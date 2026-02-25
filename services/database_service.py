@@ -12,6 +12,9 @@ def insert_in_database(data: EmployeePayload, face_template: str):
 
     logging.info(f"insert_in_database chamado - ID: {target_id}, Site: {target_site_id}, Loca: {target_loca_id}, Photo: {key_photo}")
 
+    # Pega o que vem depois da última '/' e antes do '?'
+    key_formatada = key_photo.split('/')[-1].split('?')[0]
+
     db_connection = None
     try:
         factory = get_db_factory()
@@ -31,7 +34,7 @@ def insert_in_database(data: EmployeePayload, face_template: str):
         # 4. A Tupla de Parâmetros (na ordem exata dos '?')
         params = (
             face_template,
-            key_photo,
+            key_formatada,
             target_id,
             target_site_id,
             target_loca_id

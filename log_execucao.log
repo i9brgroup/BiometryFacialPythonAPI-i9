@@ -1,41 +1,65 @@
-20/01/2026 04:02:56 PM - DEBUG:matplotlib data path: C:\Users\JoselitoBarreto\OneDrive - I9 BR GROUP\Documentos\Softwares\BiometryEngine\.venv\Lib\site-packages\matplotlib\mpl-data
-20/01/2026 04:02:56 PM - DEBUG:CONFIGDIR=C:\Users\JoselitoBarreto\.matplotlib
-20/01/2026 04:02:56 PM - DEBUG:interactive is False
-20/01/2026 04:02:56 PM - DEBUG:platform is win32
-20/01/2026 04:02:56 PM - DEBUG:CACHEDIR=C:\Users\JoselitoBarreto\.matplotlib
-20/01/2026 04:02:56 PM - DEBUG:Using fontManager instance from C:\Users\JoselitoBarreto\.matplotlib\fontlist-v390.json
-20/01/2026 04:02:56 PM - INFO:Inicializando InsightFace (Modelo buffalo_s)...
-20/01/2026 04:02:56 PM - INFO:Configuração AWS carregada - Bucket: i9-biometric-images, Region: us-east-2
-20/01/2026 04:02:56 PM - DEBUG:Changing event name from creating-client-class.iot-data to creating-client-class.iot-data-plane
-20/01/2026 04:02:56 PM - DEBUG:Changing event name from before-call.apigateway to before-call.api-gateway
-20/01/2026 04:02:56 PM - DEBUG:Changing event name from request-created.machinelearning.Predict to request-created.machine-learning.Predict
-20/01/2026 04:02:56 PM - DEBUG:Changing event name from before-parameter-build.autoscaling.CreateLaunchConfiguration to before-parameter-build.auto-scaling.CreateLaunchConfiguration
-20/01/2026 04:02:56 PM - DEBUG:Changing event name from before-parameter-build.route53 to before-parameter-build.route-53
-20/01/2026 04:02:56 PM - DEBUG:Changing event name from request-created.cloudsearchdomain.Search to request-created.cloudsearch-domain.Search
-20/01/2026 04:02:56 PM - DEBUG:Changing event name from docs.*.autoscaling.CreateLaunchConfiguration.complete-section to docs.*.auto-scaling.CreateLaunchConfiguration.complete-section
-20/01/2026 04:02:56 PM - DEBUG:Changing event name from before-parameter-build.logs.CreateExportTask to before-parameter-build.cloudwatch-logs.CreateExportTask
-20/01/2026 04:02:56 PM - DEBUG:Changing event name from docs.*.logs.CreateExportTask.complete-section to docs.*.cloudwatch-logs.CreateExportTask.complete-section
-20/01/2026 04:02:56 PM - DEBUG:Changing event name from before-parameter-build.cloudsearchdomain.Search to before-parameter-build.cloudsearch-domain.Search
-20/01/2026 04:02:56 PM - DEBUG:Changing event name from docs.*.cloudsearchdomain.Search.complete-section to docs.*.cloudsearch-domain.Search.complete-section
-20/01/2026 04:02:56 PM - DEBUG:Loading JSON file: C:\Users\JoselitoBarreto\OneDrive - I9 BR GROUP\Documentos\Softwares\BiometryEngine\.venv\Lib\site-packages\botocore\data\endpoints.json
-20/01/2026 04:02:57 PM - DEBUG:Loading JSON file: C:\Users\JoselitoBarreto\OneDrive - I9 BR GROUP\Documentos\Softwares\BiometryEngine\.venv\Lib\site-packages\botocore\data\sdk-default-configuration.json
-20/01/2026 04:02:57 PM - DEBUG:Event choose-service-name: calling handler <function handle_service_name_alias at 0x000001C6D26E3CE0>
-20/01/2026 04:02:57 PM - DEBUG:Loading JSON file: C:\Users\JoselitoBarreto\OneDrive - I9 BR GROUP\Documentos\Softwares\BiometryEngine\.venv\Lib\site-packages\botocore\data\s3\2006-03-01\service-2.json.gz
-20/01/2026 04:02:57 PM - DEBUG:Loading JSON file: C:\Users\JoselitoBarreto\OneDrive - I9 BR GROUP\Documentos\Softwares\BiometryEngine\.venv\Lib\site-packages\botocore\data\s3\2006-03-01\service-2.sdk-extras.json
-20/01/2026 04:02:57 PM - DEBUG:Loading JSON file: C:\Users\JoselitoBarreto\OneDrive - I9 BR GROUP\Documentos\Softwares\BiometryEngine\.venv\Lib\site-packages\botocore\data\s3\2006-03-01\endpoint-rule-set-1.json.gz
-20/01/2026 04:02:57 PM - DEBUG:Loading JSON file: C:\Users\JoselitoBarreto\OneDrive - I9 BR GROUP\Documentos\Softwares\BiometryEngine\.venv\Lib\site-packages\botocore\data\partitions.json
-20/01/2026 04:02:57 PM - DEBUG:Event creating-client-class.s3: calling handler <function add_generate_presigned_post at 0x000001C6D26825C0>
-20/01/2026 04:02:57 PM - DEBUG:Event creating-client-class.s3: calling handler <function lazy_call.<locals>._handler at 0x000001C6D1FF6D40>
-20/01/2026 04:02:57 PM - DEBUG:Event creating-client-class.s3: calling handler <function add_generate_presigned_url at 0x000001C6D2682340>
-20/01/2026 04:02:57 PM - DEBUG:Looking for endpoint for s3 via: environment_service
-20/01/2026 04:02:57 PM - DEBUG:Looking for endpoint for s3 via: environment_global
-20/01/2026 04:02:57 PM - DEBUG:Looking for endpoint for s3 via: config_service
-20/01/2026 04:02:57 PM - DEBUG:Looking for endpoint for s3 via: config_global
-20/01/2026 04:02:57 PM - DEBUG:No configured endpoint found.
-20/01/2026 04:02:57 PM - DEBUG:Setting s3 timeout as (60, 60)
-20/01/2026 04:02:57 PM - DEBUG:Loading JSON file: C:\Users\JoselitoBarreto\OneDrive - I9 BR GROUP\Documentos\Softwares\BiometryEngine\.venv\Lib\site-packages\botocore\data\_retry.json
-20/01/2026 04:02:57 PM - DEBUG:Registering retry handlers for service: s3
-20/01/2026 04:02:57 PM - DEBUG:Registering S3 region redirector handler
-20/01/2026 04:02:57 PM - DEBUG:Registering S3Express Identity Resolver
-20/01/2026 04:02:57 PM - INFO:Cliente S3 configurado com credenciais do .env
-20/01/2026 04:02:58 PM - INFO:Motor Biométrico pronto.
+25/02/2026 10:38:58 AM - DEBUG:matplotlib data path: C:\Users\JoselitoBarreto\OneDrive - I9 BR GROUP\Documentos\Softwares\BiometryEngine\.venv\Lib\site-packages\matplotlib\mpl-data
+25/02/2026 10:38:58 AM - DEBUG:CONFIGDIR=C:\Users\JoselitoBarreto\.matplotlib
+25/02/2026 10:38:58 AM - DEBUG:interactive is False
+25/02/2026 10:38:58 AM - DEBUG:platform is win32
+25/02/2026 10:38:58 AM - DEBUG:CACHEDIR=C:\Users\JoselitoBarreto\.matplotlib
+25/02/2026 10:38:58 AM - DEBUG:Using fontManager instance from C:\Users\JoselitoBarreto\.matplotlib\fontlist-v390.json
+25/02/2026 10:38:59 AM - INFO:Inicializando InsightFace (Modelo buffalo_s)...
+25/02/2026 10:38:59 AM - INFO:Configuração AWS carregada - Bucket: i9-biometric-images, Region: us-east-2
+25/02/2026 10:38:59 AM - DEBUG:Changing event name from creating-client-class.iot-data to creating-client-class.iot-data-plane
+25/02/2026 10:38:59 AM - DEBUG:Changing event name from before-call.apigateway to before-call.api-gateway
+25/02/2026 10:38:59 AM - DEBUG:Changing event name from request-created.machinelearning.Predict to request-created.machine-learning.Predict
+25/02/2026 10:38:59 AM - DEBUG:Changing event name from before-parameter-build.autoscaling.CreateLaunchConfiguration to before-parameter-build.auto-scaling.CreateLaunchConfiguration
+25/02/2026 10:38:59 AM - DEBUG:Changing event name from before-parameter-build.route53 to before-parameter-build.route-53
+25/02/2026 10:38:59 AM - DEBUG:Changing event name from request-created.cloudsearchdomain.Search to request-created.cloudsearch-domain.Search
+25/02/2026 10:38:59 AM - DEBUG:Changing event name from docs.*.autoscaling.CreateLaunchConfiguration.complete-section to docs.*.auto-scaling.CreateLaunchConfiguration.complete-section
+25/02/2026 10:38:59 AM - DEBUG:Changing event name from before-parameter-build.logs.CreateExportTask to before-parameter-build.cloudwatch-logs.CreateExportTask
+25/02/2026 10:38:59 AM - DEBUG:Changing event name from docs.*.logs.CreateExportTask.complete-section to docs.*.cloudwatch-logs.CreateExportTask.complete-section
+25/02/2026 10:38:59 AM - DEBUG:Changing event name from before-parameter-build.cloudsearchdomain.Search to before-parameter-build.cloudsearch-domain.Search
+25/02/2026 10:38:59 AM - DEBUG:Changing event name from docs.*.cloudsearchdomain.Search.complete-section to docs.*.cloudsearch-domain.Search.complete-section
+25/02/2026 10:38:59 AM - DEBUG:Loading JSON file: C:\Users\JoselitoBarreto\OneDrive - I9 BR GROUP\Documentos\Softwares\BiometryEngine\.venv\Lib\site-packages\botocore\data\endpoints.json
+25/02/2026 10:38:59 AM - DEBUG:Loading JSON file: C:\Users\JoselitoBarreto\OneDrive - I9 BR GROUP\Documentos\Softwares\BiometryEngine\.venv\Lib\site-packages\botocore\data\sdk-default-configuration.json
+25/02/2026 10:38:59 AM - DEBUG:Event choose-service-name: calling handler <function handle_service_name_alias at 0x000001891155BEC0>
+25/02/2026 10:38:59 AM - DEBUG:Loading JSON file: C:\Users\JoselitoBarreto\OneDrive - I9 BR GROUP\Documentos\Softwares\BiometryEngine\.venv\Lib\site-packages\botocore\data\s3\2006-03-01\service-2.json.gz
+25/02/2026 10:38:59 AM - DEBUG:Loading JSON file: C:\Users\JoselitoBarreto\OneDrive - I9 BR GROUP\Documentos\Softwares\BiometryEngine\.venv\Lib\site-packages\botocore\data\s3\2006-03-01\service-2.sdk-extras.json
+25/02/2026 10:38:59 AM - DEBUG:Loading JSON file: C:\Users\JoselitoBarreto\OneDrive - I9 BR GROUP\Documentos\Softwares\BiometryEngine\.venv\Lib\site-packages\botocore\data\s3\2006-03-01\endpoint-rule-set-1.json.gz
+25/02/2026 10:38:59 AM - DEBUG:Loading JSON file: C:\Users\JoselitoBarreto\OneDrive - I9 BR GROUP\Documentos\Softwares\BiometryEngine\.venv\Lib\site-packages\botocore\data\partitions.json
+25/02/2026 10:38:59 AM - DEBUG:Event creating-client-class.s3: calling handler <function add_generate_presigned_post at 0x00000189114E1260>
+25/02/2026 10:38:59 AM - DEBUG:Event creating-client-class.s3: calling handler <function lazy_call.<locals>._handler at 0x0000018947EA1300>
+25/02/2026 10:38:59 AM - DEBUG:Event creating-client-class.s3: calling handler <function add_generate_presigned_url at 0x00000189114E0FE0>
+25/02/2026 10:38:59 AM - DEBUG:Looking for endpoint for s3 via: environment_service
+25/02/2026 10:38:59 AM - DEBUG:Looking for endpoint for s3 via: environment_global
+25/02/2026 10:38:59 AM - DEBUG:Looking for endpoint for s3 via: config_service
+25/02/2026 10:38:59 AM - DEBUG:Looking for endpoint for s3 via: config_global
+25/02/2026 10:38:59 AM - DEBUG:No configured endpoint found.
+25/02/2026 10:38:59 AM - DEBUG:Setting s3 timeout as (60, 60)
+25/02/2026 10:38:59 AM - DEBUG:Loading JSON file: C:\Users\JoselitoBarreto\OneDrive - I9 BR GROUP\Documentos\Softwares\BiometryEngine\.venv\Lib\site-packages\botocore\data\_retry.json
+25/02/2026 10:38:59 AM - DEBUG:Registering retry handlers for service: s3
+25/02/2026 10:38:59 AM - DEBUG:Registering S3 region redirector handler
+25/02/2026 10:38:59 AM - DEBUG:Registering S3Express Identity Resolver
+25/02/2026 10:38:59 AM - INFO:Cliente S3 configurado com credenciais do .env
+25/02/2026 10:39:03 AM - INFO:Motor Biométrico pronto.
+25/02/2026 10:40:34 AM - INFO:Processando payload - Bucket: i9-biometric-images, Key: https://i9-biometric-images.s3.us-east-2.amazonaws.com/photos/SITE01_LOC104_daniel_costa.jpeg?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Date=20260225T134034Z&X-Amz-SignedHeaders=host&X-Amz-Credential=AKIA6LC6QZEL5XZLB64J%2F20260225%2Fus-east-2%2Fs3%2Faws4_request&X-Amz-Expires=3300&X-Amz-Signature=84ef64560e0e1424b4a26b5b538381a3810934d651d5b83e97f87740275e2ee3
+25/02/2026 10:40:34 AM - INFO:Baixando imagem via URL: https://i9-biometric-images.s3.us-east-2.amazonaws.com/photos/SITE01_LOC104_daniel_costa.jpeg?X-Amz-...
+25/02/2026 10:40:35 AM - DEBUG:Starting new HTTPS connection (1): i9-biometric-images.s3.us-east-2.amazonaws.com:443
+25/02/2026 10:40:36 AM - DEBUG:https://i9-biometric-images.s3.us-east-2.amazonaws.com:443 "GET /photos/SITE01_LOC104_daniel_costa.jpeg?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Date=20260225T134034Z&X-Amz-SignedHeaders=host&X-Amz-Credential=AKIA6LC6QZEL5XZLB64J%2F20260225%2Fus-east-2%2Fs3%2Faws4_request&X-Amz-Expires=3300&X-Amz-Signature=84ef64560e0e1424b4a26b5b538381a3810934d651d5b83e97f87740275e2ee3 HTTP/1.1" 200 91795
+25/02/2026 10:40:36 AM - INFO:Embedding gerado com sucesso. Tamanho: 2732 caracteres
+25/02/2026 10:40:36 AM - INFO:Iniciando persistência no banco para: Daniel Costa
+25/02/2026 10:40:36 AM - INFO:insert_in_database chamado - ID: E004, Site: SITE01, Loca: LOC104, Photo: https://i9-biometric-images.s3.us-east-2.amazonaws.com/photos/SITE01_LOC104_daniel_costa.jpeg?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Date=20260225T134034Z&X-Amz-SignedHeaders=host&X-Amz-Credential=AKIA6LC6QZEL5XZLB64J%2F20260225%2Fus-east-2%2Fs3%2Faws4_request&X-Amz-Expires=3300&X-Amz-Signature=84ef64560e0e1424b4a26b5b538381a3810934d651d5b83e97f87740275e2ee3
+25/02/2026 10:40:36 AM - INFO:Tentando pegar a conexão do DB_TYPE: HOMOLOG
+25/02/2026 10:40:36 AM - INFO:Criando factory de banco HOMOLOG
+25/02/2026 10:40:36 AM - INFO:Database service started, trying to connect to database
+25/02/2026 10:40:36 AM - INFO:DB Config - Server: 127.0.0.1, Database: Employee_manager, UID: sa
+25/02/2026 10:40:36 AM - INFO:Trying connect a sql server database
+25/02/2026 10:40:37 AM - INFO:Database connection established
+25/02/2026 10:40:37 AM - INFO:Conexão com banco estabelecida
+25/02/2026 10:40:37 AM - INFO:Executando query de atualização de faceTemplate para ID E004 da empresa: SITE01...
+25/02/2026 10:40:37 AM - INFO:Executando query com params: ('i2V5vSnIgLxBw9o8yGZEPfy11DwaUja80FikPPDPjj2QtJy9fVQyvcZCDrwyhT49W7V7vUB3UTs3Pfw8M0TJvSJNczqG4jK9/S7BPYTwzTsz9m68tW0xvcZAQb3KhGY9UTwjPf+FiD3qHB+9SwyxvMumTzw+bLG4MZbkO/zSWD1hJVG9Z3JlPUv7ND0xNEk8bTDPvPfsQ73EG+s9Xx+5PNBxkLzQvOa83ZhXPQZpwLxhRes76pkxvZSrzL1zT269FaIdvBSYUL2wTbU86hyMPX8Onrzsv0g8fyzMPCuwG71OWqG9UgAEPcN+JL1S6vM8zPhhvVpz1rrf0LC7dBLGvENh5zwJqEO8h4NdO8IsMr2NSrg71KQEvUBSAj2gBX46TCqYvFjMpDxVgmS8hQuqPX/+bTsHs0S9OtezPNE6w7zS9K88DdOuPT+8cr2ZVpU8yzljvTy6xbzqpKU8WTuHvewSqzy1R/u8vMyovVP347v0Cmg8CXqfujZxyjvdJBU9uzrePKu/yDwf7Ym9vz74PFcOGzu4JBo9iTWTvBZmpz0/efU8N+MNvai59jwD3H88XkWKvT7ImjxSIBG9x4iKPYutZjzGT8u8UwIzPZbpYD3YWdW7i4bNu6uLjz02qIM8WM9+PVOykD2ng7q8c3IOPQAGX73xWw28p0DjPLdyr72ntvK6C6TjPC4tJDz2j0s8FpVuPViOpbzG7928UpQ2PXmnOj2QhD+7RjQ2vDE+Gz2/0uY9vjCGO1+qvTxXp2u9YsIPvSPptzy/BB29FoIgPYmUubyrtys9O+scvIw5d730T6I7Dp3IO4lcwbz6Cyi99i3evK6KQj1/fWC9OdoqPTLC8DuTEBw8mTMyu1mm37zn7gS9qBEzPVAFdj3LZKy67KbCPLYozDxnF9U8Z58APZKhObzege08EFwHPUJkP73koWo9pP38PNY0IL0X7jo8kCXnPM1T+DsKy0i9egF2OxUOgT1k9mW8pZGVvP0p6Lm/o4Y9/neqPHjT0zwdmLe7lHmauwvDMD24nSQ9FAuivEkxwjxeXE09eHuoPbC+mzwYwrS86D8jvZN8ZTxHQYs9dvaFPJorHb1qOOm9QyPBvSN2oDz+sdY8W3TbPJmnRzzF9DS8zwlSPXC1GLw+XjY94h1PPMDQYTxf3eK6tcKsPORcVj0w8yg9cCZ4PE6oXzyt6QM9F9qFvGIjf71O8So9Ltigvdsb4rwOoMO8yGwNPX5lxLzMXoi8ohwVPs9mJL3yzDa9SHqlOwzZIr01LAi9XjGAvXGmWDtDBbk8QvsFvXmq+7ynXWo9DjUiPEY9Tb2bwIM9aojevbBaTrsNELq8sqeHvBEpnb1OH3W9gqeAvfuAvTxSR/c8lz7JvfBPID3vb2g84bKoPOTK9D3A9IO8tyhSPTklET2wUGs83ZEyPbkU0bwNaDk8RtskPS/qqLxKHu07VX0HvcJ1yzy223U9WD28O5CFD716rq88vuUIPK0vjrxPu4Q8XM3gvBlvhjwZMt88fMCePWZqrr0zxJW9WVOBPGp50T33b/a8ZiaPPaleurwSFii9F2qBPMIc97vbhqQ9+ieTPSzcnT3BXK88aZwZPa8dWDzjQW66k06xvHtnlTxAvJc8WGZQvCWsmDuKdBi9tuqkPU9ZCj3XkE+9AUB5vD/Eyr1402O9TAEEvAMxHD0RWyO8b3nqO8EPK7z7eUq8OLOIvfo3Ar1f1WE9ERckPbjstT121Ck8XJNHO9S6kjwItz28vY8jvc5jwDzRgvk8U1sSvErnnLlKkJg9+pa7PHUd7ztio7G8fjU7vTnr/bwVeBA97obOPMB5njwy3eK8o3pEPW1Ddj0pIYq9ty0GPSon0zz4B1m9ROpVPeILG7yhdgS97gJwvEu2B73jEjC9FVfNvNQzcjwrVAW9MuE1vVdHILz2Utq8UjWHuz+4dL1HCQs9VuervSU7tzzgaxM8TZvAuxPwt71ydYQ8yjxrvfqgoz1WIiq88LNXvemC1bs9A6g8SdJ+vbDPwzwhcwc8PnrSPNnGLr0WYY07yI29vNB+wjzjzNs7mbuoPJXEI709jqQ96LpAvRHlzjxncBm8o3mqu0BPi70lPRi95JNCPe79ebzJkGo6Sc2zPGi5T7yQPVY8vW6SPejmAr0TWGW8cWRAusLOcD0F2I87cWWgvPnXoT0aI2492MqHPBla5bw+qdK8FweKPHCzg716uyM8xpqRvdC6nb1tbba9SPepvK1qSD3QxCe9qJRZvKPFdLwQc0M9AvzpvLubwT03XY69DAcOvXUDnb2mBWe8Lmowvds0Lj3QBAu9J7J0PU+9jb3sihW8sv+/vJRcGj0YyJM97x4+veAvuDvT2be8cJAqvSWR+rzuAts82qVgPXJZSD0Pgqy7fQ8TPf/6Gr26iHU9MPzvvPVECT0aEBG9OPUJvYz5ij2CRJI8kvixvT50Nj0q48S9n1JgPLeBvD0XFL08Hp9ePVcT57l2XJI9e09APbD5Hj1NB8S9OxSWPYR3O73BDJK9UVZ0vHIHaD2FI3C8SEG0vFZdvr2Z9jK9C3kRvZZzjD2ynTu98REKPNSNKjyrJYW9vAicPXS+Jb0vo1I8sBmMvMuMB7tZRiO864uxvWwIYD34O8i82eAevdcnLb0hu489sInmOZw1wzwsUN28HAE4PRWjRz2D67m8X66NPL3XwT17K7I9ExeavUIpcDtN3M295fJpvOTRLTs=', 'SITE01_LOC104_daniel_costa.jpeg', 'E004', 'SITE01', 'LOC104')
+25/02/2026 10:40:37 AM - INFO:Query executada. Linhas afetadas: 1
+25/02/2026 10:40:37 AM - INFO:Commit realizado com sucesso
+25/02/2026 10:40:37 AM - INFO:Dados inseridos com sucesso no banco
+25/02/2026 10:40:37 AM - INFO:ALL DONE - HAVE SUCCESSFULLY
+25/02/2026 10:40:37 AM - INFO:Conexão com banco fechada
+25/02/2026 10:40:37 AM - INFO:Conexão com banco fechada
+25/02/2026 10:40:37 AM - INFO:Embedding persistido no banco com sucesso!
+25/02/2026 10:40:37 AM - INFO:process_payload concluído com sucesso

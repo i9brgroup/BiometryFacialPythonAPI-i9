@@ -1,23 +1,18 @@
+import base64
 import io
+import logging
 
+import boto3
+import cv2
+import numpy as np
 import requests
 from botocore.exceptions import ClientError
-import boto3
-import numpy as np
-import cv2
-import base64
-import logging
-import os
-import uuid
-import time
-import threading
-from queue import Queue
-from config import get_aws_config
-
 from fastapi import HTTPException
 
+from config import get_aws_config
 from models.employee_payload import EmployeePayload
 from services.database_service import insert_in_database
+from services.generate_files_csv import generate_files_csv
 
 # Tenta importar o InsightFace
 try:
@@ -62,21 +57,6 @@ class BiometryEngine:
         except Exception as e:
             logger.critical(f"Erro fatal ao iniciar InsightFace: {e}")
             raise e
-
-        # --- Fila de processamento de jobs (download S3 -> gerar embedding -> persistir) ---
-        # Jobs armazenam: status, result, error, timestamps
-        self.job_queue = Queue()
-        self.jobs = {}  # job_id -> dict
-
-        # Número de workers configurável via env var S3_WORKERS ou default 2
-        try:
-            self.worker_count = int(os.environ.get('S3_WORKERS', '2'))
-        except Exception:
-            self.worker_count = 2
-
-        for i in range(self.worker_count):
-            t = threading.Thread(target=self._worker_loop, name=f"biometry-worker-{i}", daemon=True)
-            t.start()
 
     def _bytes_to_image(self, image_bytes: bytes):
         """Converte bytes brutos (upload) para formato OpenCV (numpy array)"""
@@ -202,10 +182,6 @@ class BiometryEngine:
         if not bucket:
             return False, f"Bucket S3 não configurado. Verifique o .env. Bucket atual: {bucket}"
 
-        # Adiciona prefixo 'photos/' ao caminho se não estiver presente
-        if not photo_key.startswith('photos/'):
-            photo_key = f'photos/{photo_key}'
-
         logger.info(f"Processando payload - Bucket: {bucket}, Key: {photo_key}")
 
         # Baixa imagem do S3 e gera embedding (download_img_from_s3 retorna dict ou levanta HTTPException)
@@ -227,7 +203,6 @@ class BiometryEngine:
 
         logger.info(f"Embedding gerado com sucesso. Tamanho: {len(embedding_base64)} caracteres")
 
-        # Persiste no banco chamando a função que espera o payload do frontend + template
         try:
             logger.info(f"Iniciando persistência no banco para: {getattr(data, 'name', 'N/A')}")
             insert_in_database(data, embedding_base64)
@@ -239,139 +214,43 @@ class BiometryEngine:
 
         # Sucesso: retorna o embedding para o caller
         logger.info("process_payload concluído com sucesso")
-        return True, embedding_base64
+        return {"status" : "done", "embedding": embedding_base64}
 
-    # ---------------- Queue / Worker logic ----------------
-    def enqueue_payload(self, data: EmployeePayload):
-        """Enfileira um payload para download do S3 e geração do embedding.
-
-        Retorna job_id (string) imediatamente. O job roda em background.
-        """
-        job_id = uuid.uuid4().hex
-        self.jobs[job_id] = {
-            'status': 'pending',
-            'created_at': time.time(),
-            'started_at': None,
-            'finished_at': None,
-            'result': None,
-            'error': None
-        }
-        # Empilha o job (job_id, payload)
-        self.job_queue.put((job_id, data))
-        logger.info(f"Job enqueued {job_id} for photoKey={getattr(data,'photoKey', None) or getattr(data,'photo_key', None)}")
-        return job_id
-
-    def get_job_status(self, job_id: str):
-        return self.jobs.get(job_id)
-
-    def _worker_loop(self):
-        """Loop executado por cada worker; processa jobs da fila."""
-        while True:
-            try:
-                job_id, data = self.job_queue.get()
-            except Exception:
-                time.sleep(0.1)
-                continue
-
-            # Marca como processando
-            job = self.jobs.get(job_id)
-            if job is None:
-                # Registro não encontrado; inicializar (defensivo)
-                self.jobs[job_id] = {'status': 'processing', 'created_at': time.time(), 'started_at': time.time(), 'finished_at': None, 'result': None, 'error': None}
-                job = self.jobs[job_id]
-
-            job['status'] = 'processing'
-            job['started_at'] = time.time()
-            logger.info(f"Worker {threading.current_thread().name} started job {job_id}")
-
-            try:
-                success, result = self.process_payload(data)
-                if success:
-                    job['status'] = 'done'
-                    job['result'] = result
-                else:
-                    job['status'] = 'error'
-                    job['error'] = result
-                    logger.error(f"Job {job_id} failed: {result}")
-            except Exception as e:
-                job['status'] = 'error'
-                job['error'] = str(e)
-                logger.exception(f"Exception while running job {job_id}: {e}")
-            finally:
-                job['finished_at'] = time.time()
-                # marca tarefa como concluída na fila
-                try:
-                    self.job_queue.task_done()
-                except Exception:
-                    pass
-                logger.info(f"Worker {threading.current_thread().name} finished job {job_id} with status {job['status']}")
-
-    def create_presigned_url(self ,bucket_name: str, object_name: str, expiration=3600):
-        """Generate a presigned URL to share an S3 object
-
-        :param bucket_name: string
-        :param object_name: string
-        :param expiration: Time in seconds for the presigned URL to remain valid
-        :return: Presigned URL as string. If error, returns None.
-        """
-
-        # Generate a presigned URL for the S3 object
+    def download_img_from_s3(self, bucket: str, key_or_url: str):
         try:
-            response = self.s3_client.generate_presigned_url(
-                'get_object',
-                Params={'Bucket': bucket_name, 'Key': object_name},
-                ExpiresIn=expiration,
-            )
-        except ClientError as e:
-            logging.error(e)
-            return None
-
-        # The response contains the presigned URL
-        return response
-
-    def download_img_from_s3(self, bucket: str, key: str):
-        try:
-            # Tenta gerar URL pré-assinada para download (mais segura/controle de acesso)
-            url = self.create_presigned_url(bucket, key)
             file_stream = io.BytesIO()
-
             resp = None
-            if url is not None:
-                # Faz download em streaming para não alocar múltiplas cópias grandes na memória
+
+            # 1. Tenta identificar se key_or_url é uma URL ou apenas a chave do objeto
+            is_url = key_or_url.startswith("http://") or key_or_url.startswith("https://")
+
+            if is_url:
+                # Se for URL, tenta baixar via requests
                 try:
-                    resp = requests.get(url, stream=True, timeout=15)
+                    logger.info(f"Baixando imagem via URL: {key_or_url[:100]}...")
+                    resp = requests.get(key_or_url, stream=True, timeout=15)
                     resp.raise_for_status()
                     for chunk in resp.iter_content(chunk_size=8192):
                         if chunk:
                             file_stream.write(chunk)
-                    # garante que o ponteiro da stream volte ao início
                     file_stream.seek(0)
                 except requests.RequestException as re:
-                    # Se o download pela URL falhar, tenta fallback com boto3
-                    logger.warning(f"Falha no download pela URL pré-assinada: {re}; tentando fallback com boto3")
-                    file_stream = io.BytesIO()
-                    self.s3_client.download_fileobj(bucket, key, file_stream)
-                    file_stream.seek(0)
-                finally:
-                    # fecha a resposta HTTP para liberar conexões/recursos, se existir
-                    try:
-                        if resp is not None:
-                            resp.close()
-                    except Exception:
-                        pass
+                    logger.error(f"Falha ao baixar via URL: {re}")
+                    raise HTTPException(status_code=400, detail=f"Erro ao baixar imagem da URL: {str(re)}")
             else:
-                # Fallback: usa boto3 para baixar direto para a memória
-                self.s3_client.download_fileobj(bucket, key, file_stream)
-                file_stream.seek(0)
+                # Se não for URL, assume que é a Key e baixa via boto3
+                try:
+                    logger.info(f"Baixando imagem via Boto3 - Bucket: {bucket}, Key: {key_or_url}")
+                    self.s3_client.download_fileobj(bucket, key_or_url, file_stream)
+                    file_stream.seek(0)
+                except ClientError as ce:
+                    logger.error(f"Erro Boto3 ao baixar do S3: {ce}")
+                    # Tenta fallback gerando URL se falhar o download_fileobj (opcional, mas aqui vamos subir o erro)
+                    raise HTTPException(status_code=400, detail=f"Erro S3: {str(ce)}")
 
             # 2. Lê os bytes brutos do arquivo na memória
             raw_bytes = file_stream.read()
-
-            # Fecha e descarta o buffer após leitura para liberar memória
-            try:
-                file_stream.close()
-            except Exception:
-                pass
+            file_stream.close()
 
             if not raw_bytes:
                 raise HTTPException(status_code=400, detail="Objeto S3 vazio ou inválido")
@@ -381,13 +260,11 @@ class BiometryEngine:
             if img is None:
                 raise HTTPException(status_code=400, detail="Arquivo S3 não é uma imagem válida")
 
-            # 4. Gera embedding a partir do np.ndarray já decodificado (evita recodificar)
+            # 4. Gera embedding
             success, result = self.generate_embedding(img)
             if not success:
-                # result contém a mensagem de erro da geração
                 raise HTTPException(status_code=400, detail=str(result))
 
-            # Se sucesso, extrai o embedding e retorna
             embedding_base64 = result.get("embedding_base64") if isinstance(result, dict) else None
             response = {"status": "sucesso"}
             if embedding_base64:
@@ -397,17 +274,18 @@ class BiometryEngine:
                     "bbox": result.get("bbox")
                 })
             else:
-                # Formato inesperado, retorna o payload completo
                 response["embedding"] = result
 
             return response
 
-        except ClientError as ce:
-            logger.error(f"ClientError ao acessar S3: {ce}")
-            raise HTTPException(status_code=500, detail=str(ce))
         except HTTPException:
-            # Re-levanta HTTPExceptions para serem tratadas pelo caller
             raise
         except Exception as e:
             logger.exception(f"Erro no download/processamento do S3: {e}")
             raise HTTPException(status_code=500, detail=str(e))
+        finally:
+            if 'resp' in locals() and resp is not None:
+                try:
+                    resp.close()
+                except:
+                    pass
