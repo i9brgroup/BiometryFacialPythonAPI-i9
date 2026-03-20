@@ -1,4 +1,5 @@
 import base64
+import gzip
 import io
 import logging
 
@@ -12,7 +13,6 @@ from fastapi import HTTPException
 from config import get_aws_config
 from models.employee_payload import EmployeePayload
 from services.database_service import insert_in_database
-from services.generate_files_csv import generate_files_csv
 
 # Tenta importar o InsightFace
 try:
@@ -125,6 +125,7 @@ class BiometryEngine:
         # Retorno pronto para salvar no Banco ou JSON
         # Convertemos para Base64 (string) pois é mais fácil de trafegar que lista de floats
         embedding_bytes = embedding.astype(np.float32).tobytes()
+        embedding_zipado = gzip.compress(data=embedding_bytes, compresslevel=9, mtime=0)
         embedding_base64 = base64.b64encode(embedding_bytes).decode('utf-8')
 
         return True, {
@@ -175,12 +176,13 @@ class BiometryEngine:
         # Esperamos que o payload contenha a referência S3 em `photoKey`
         photo_key = getattr(data, 'photoKey', None) or getattr(data, 'photo_key', None) or getattr(data, 'key_photo', None)
         if not photo_key:
-            return False, "Payload não contém 'photoKey' com a referência S3."
+            raise HTTPException(status_code=400, detail="Payload inválido: 'photoKey' é obrigatório e deve conter a referência S3 da imagem.")
 
         # Obtém bucket S3 via config (usa self.bucket inicializado no __init__)
         bucket = self.bucket
         if not bucket:
-            return False, f"Bucket S3 não configurado. Verifique o .env. Bucket atual: {bucket}"
+            logger.info("Bucket não configurado. Verifique o .env.")
+            raise HTTPException(status_code=500, detail="Bucket S3 não configurado. Verifique o .env.")
 
         logger.info(f"Processando payload - Bucket: {bucket}, Key: {photo_key}")
 
@@ -188,33 +190,36 @@ class BiometryEngine:
         try:
             s3_response = self.download_img_from_s3(bucket, photo_key)
         except HTTPException as he:
-            return False, f"Falha ao baixar/processar imagem do S3: {he.detail}"
+            logger.error(f"Erro ao baixar/processar imagem do S3: {he.detail}")
+            raise HTTPException(status_code=400, detail=f"Erro ao baixar/processar imagem do S3: {he.detail}")
         except Exception as e:
-            return False, f"Erro inesperado ao baixar/processar S3: {e}"
+            logger.error(f"Erro inesperado ao baixar/processar S3: {e}")
+            raise HTTPException(status_code=500, detail=f"Erro inesperado ao baixar/processar S3: {e}")
 
         # Extrai embedding base64
-        embedding_base64 = None
+        embedding_bytes = None
         if isinstance(s3_response, dict):
-            embedding_base64 = s3_response.get('embedding')
+            embedding_bytes = s3_response.get('embedding')
 
-        if not embedding_base64:
+        if not embedding_bytes:
             logger.error(f"S3 response não contém embedding. Response: {s3_response}")
-            return False, "Não foi possível obter embedding da imagem baixada do S3."
+            raise HTTPException(status_code=422, detail="Imagem processada mas nenhum embedding foi gerado.")
 
-        logger.info(f"Embedding gerado com sucesso. Tamanho: {len(embedding_base64)} caracteres")
+        logger.info(f"Embedding gerado com sucesso. Tamanho: {len(embedding_bytes)} caracteres")
 
+        # API GUILHERME
         try:
             logger.info(f"Iniciando persistência no banco para: {getattr(data, 'name', 'N/A')}")
-            insert_in_database(data, embedding_base64)
-            logger.info("Embedding persistido no banco com sucesso!")
+            persistiu_no_banco = insert_in_database(data, embedding_bytes)
+            if persistiu_no_banco:
+                logger.info("Embedding persistido no banco com sucesso!")
         except Exception as e:
             # Logamos e retornamos erro — caller pode optar por retry
             logger.error(f"Falha ao inserir embedding no banco: {e}")
-            return False, f"Falha ao inserir embedding no banco: {e}"
-
+            raise HTTPException(status_code=500, detail="Erro ao persistir dados biométricos.")
         # Sucesso: retorna o embedding para o caller
         logger.info("process_payload concluído com sucesso")
-        return {"status" : "done", "embedding": embedding_base64}
+        return {"status" : "done"}
 
     def download_img_from_s3(self, bucket: str, key_or_url: str):
         try:
