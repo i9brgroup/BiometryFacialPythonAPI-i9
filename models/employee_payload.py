@@ -8,3 +8,7 @@ class EmployeePayload(BaseModel):
     siteId: str
     localId: str
     photoKey: str
+
+class ApiPayload(BaseModel):
+    siteId: str
+    localId: str
