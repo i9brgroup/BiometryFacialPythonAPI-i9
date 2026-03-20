@@ -38,7 +38,6 @@ def get_db_config():
         'PWD': get_value('mysql', 'PWD', 'DB_PWD')
     }
 
-
 def get_aws_config():
     """Retorna configurações AWS/S3"""
     # Tenta bucket em múltiplas seções
@@ -67,3 +66,7 @@ def get_secret_key():
 def get_hashed_key():
     """Retorna a chave hash armazenada"""
     return get_value('api_security', 'HASHED_KEY')
+
+def get_api_templates_url():
+    """Retorna a URL base para templates da API"""
+    return get_value('api_security', 'API_URL_TEMPLATES')
