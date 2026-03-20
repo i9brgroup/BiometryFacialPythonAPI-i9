@@ -8,12 +8,9 @@ def insert_in_database(data: EmployeePayload, face_template: str):
     key_photo = getattr(data, 'photoKey', None) or getattr(data, 'photo_key', None) or getattr(data, 'key_photo', None)
     target_id = getattr(data, 'id', None)
     target_site_id = getattr(data, 'siteId', None) or getattr(data, 'site_id', None) or getattr(data, 'siteID', None)
-    target_loca_id = getattr(data, 'localId', None) or getattr(data, 'local_id', None) or getattr(data, 'locaID', None)
+    target_local_id = getattr(data, 'localId', None) or getattr(data, 'local_id', None) or getattr(data, 'locaID', None)
 
-    logging.info(f"insert_in_database chamado - ID: {target_id}, Site: {target_site_id}, Loca: {target_loca_id}, Photo: {key_photo}")
-
-    # Pega o que vem depois da última '/' e antes do '?'
-    key_formatada = key_photo.split('/')[-1].split('?')[0]
+    logging.info(f"insert_in_database chamado - ID: {target_id}, Site: {target_site_id}, Loca: {target_local_id}, Photo: {key_photo}")
 
     db_connection = None
     try:
@@ -24,8 +21,7 @@ def insert_in_database(data: EmployeePayload, face_template: str):
 
         query = """
                 UPDATE EMPLOYEE
-                SET faceTemplate = ?,
-                    keyPhoto = ?
+                SET FingerPrintTemplate = ?
                 WHERE ID = ?
                   AND EmployeeSiteID = ?
                   AND EmployeeLocalID = ?
@@ -34,17 +30,16 @@ def insert_in_database(data: EmployeePayload, face_template: str):
         # 4. A Tupla de Parâmetros (na ordem exata dos '?')
         params = (
             face_template,
-            key_formatada,
             target_id,
             target_site_id,
-            target_loca_id
+            target_local_id
         )
         logging.info(f"Executando query de atualização de faceTemplate para ID {target_id} da empresa: {target_site_id}...")
 
         sucess = db_connection.execute_query(query, params)
         if sucess:
             logging.info("Dados inseridos com sucesso no banco")
-            logging.info('ALL DONE - HAVE SUCCESSFULLY')
+            return True
         else:
             logging.error("execute_query retornou False - nenhuma linha foi atualizada")
             raise Exception("Nenhuma linha foi atualizada no banco. Verifique se o registro existe.")
